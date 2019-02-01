@@ -1,13 +1,12 @@
 import json
-from django.http import Http404
-from django.views.generic import TemplateView
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import generics
+from rest_framework.response import Response
+from django.views.generic import TemplateView
 
 
 
-class RandomNumberList(APIView):
+class RandomNumberList(generics.ListAPIView):
     """
     A list of random numbers.
     """
@@ -19,3 +18,8 @@ class RandomNumberList(APIView):
         except Exception as e:
             result = {"status": status.HTTP_400_BAD_REQUEST, "message": str(e)}
         return Response(result)
+
+
+
+class HomeView(TemplateView):
+    template_name = 'index.html'
